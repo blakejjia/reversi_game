@@ -4,22 +4,27 @@ class ChessState {
   final Player player;
   final Game game;
   final String message;
+  // 1: white, -1: black, 0: none
+  final int color;
 
   ChessState({
     required this.player,
     required this.game,
     required this.message,
+    this.color = 0,
   });
 
   ChessState copyWith({
     Player? player,
     Game? game,
     String? message,
+    int? color,
   }) {
     return ChessState(
       player: player ?? this.player,
       game: game ?? this.game,
       message: message ?? this.message,
+      color: color ?? this.color,
     );
   }
 

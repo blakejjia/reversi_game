@@ -50,11 +50,7 @@ class Move with _$Move {
   int y;
   Player player;
 
-  Move({
-    required this.x,
-    required this.y,
-    required this.player,
-  });
+  Move({required this.x, required this.y, required this.player});
 
   factory Move.fromJson(Map<String, dynamic> json) => _$MoveFromJson(json);
 }

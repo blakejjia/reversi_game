@@ -1,7 +1,7 @@
 part of '../game_page.dart';
 
 // 棋盘格子
-Widget _chessCell(BuildContext context, int row, int col, int piece) {
+Widget _chessCell(BuildContext context, ChessState state,int row, int col, int piece) {
   return GestureDetector(
     onTap: () => {context.read<ChessBloc>().add(MoveEvent(row, col))},
     child: Container(
@@ -20,20 +20,17 @@ Widget _chessCell(BuildContext context, int row, int col, int piece) {
               child: () {
                 switch (piece) {
                   case -1:
-                    return Icon(Icons.circle_outlined);
+                    return Icon(Icons.circle, color: Colors.white,size: 40,);
                   case 1:
-                    return Icon(Icons.circle);
-                  case -2:
-                    return Icon(
-                      Icons.circle_outlined,
-                      color: Colors.black.withOpacity(0.5),
-                    );
-                  case 2:
-                    return Icon(
-                      Icons.circle,
-                      color: Colors.black.withOpacity(0.5),
-                    );
+                    return Icon(Icons.circle,size: 40);
                   default:
+                    if (piece == state.color*2){
+                      return Icon(
+                        Icons.circle,
+                        color: Colors.black.withOpacity(0.1),
+                        size: 40,
+                      );
+                    }
                     return SizedBox.shrink();
                 }
               }(),

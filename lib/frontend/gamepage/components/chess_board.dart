@@ -8,7 +8,8 @@ class ChessBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        SizedBox(
+        Container(
+          color: Colors.purple.withAlpha(45),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width,
           child: GridView.builder(
@@ -18,22 +19,36 @@ class ChessBoard extends StatelessWidget {
             itemBuilder: (context, index) {
               int row = index ~/ 8;
               int col = index % 8;
-              return _chessCell(context ,row, col, state.game.board[row][col]);
+              return _chessCell(
+                context,
+                state,
+                row,
+                col,
+                state.game.board[row][col],
+              );
             },
             itemCount: 64,
           ),
         ),
         Text("your player id:${state.player.shortId}"),
         // Text(state.game.player1.toString() +"\n"+ state.game.player2.toString()+"\n" +state.player.toString()),
-        Text("your opponent:${state.game.player1.id == state.player.id ? state.game.player2.name : state.game.player1.name}"),
+        Text(
+          "your opponent:${state.game.player1.id == state.player.id ? state.game.player2.name : state.game.player1.name}",
+        ),
+        Text("your color: ${state.color == 1 ? 'white' : state.color == 0 ? 'none' : 'black'}"),
         Text("message: ${state.message}"),
-        ElevatedButton(onPressed: (){
-          context.read<ChessBloc>().add(SetPlayerId());
-        }, child: Text("Set playerID!")),
-        ElevatedButton(onPressed: (){
-          _showOpponentIdDialog(context);
-        },
-            child: Text("connect to your opponent!"))
+        ElevatedButton(
+          onPressed: () {
+            context.read<ChessBloc>().add(SetPlayerId());
+          },
+          child: Text("Set playerID!"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            _showOpponentIdDialog(context);
+          },
+          child: Text("connect to your opponent!"),
+        ),
       ],
     );
   }

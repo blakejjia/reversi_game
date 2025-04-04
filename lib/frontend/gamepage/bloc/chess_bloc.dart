@@ -26,7 +26,10 @@ class ChessBloc extends Bloc<ChessEvent, ChessState> {
           game: state.game.copyWith(
             player1: Player.fromJson(gameData['player1']),
             player2: Player.fromJson(gameData['player2']),
-            board: (gameData['board'] as List).map((row) => (row as List).map((e) => e as int).toList()).toList(),
+            board:
+                (gameData['board'] as List)
+                    .map((row) => (row as List).map((e) => e as int).toList())
+                    .toList(),
             currentPlayer: gameData['currentPlayer'],
             winner: gameData['winner'],
             gameOver: gameData['gameOver'],
@@ -37,12 +40,13 @@ class ChessBloc extends Bloc<ChessEvent, ChessState> {
     wsService.onMessage("message", (data) {
       emit(state.copyWith(message: data));
     });
+    wsService.onMessage("setColor", (data) {
+      print("setColor: $data");
+      emit(state.copyWith(color: data));
+    });
 
     on<MoveEvent>((event, emit) {
-      wsService.sendMessage("move", {
-        "x": event.x,
-        "y": event.y,
-      });
+      wsService.sendMessage("move", {"x": event.x, "y": event.y});
     });
 
     on<SetPlayerId>((event, emit) {
