@@ -37,7 +37,6 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   static List<Widget> _pages = <Widget>[
-    Center(child: Text('Home Page')),
     GamePage(),
     Center(child: Text('Settings Page')),
   ];
@@ -51,11 +50,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Reversi Game')),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.videogame_asset),
             label: 'Game',

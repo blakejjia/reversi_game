@@ -21,3 +21,6 @@ class FindOpponentEvent extends ChessEvent {
 
   FindOpponentEvent(String opponentId) : opponentId = int.parse(opponentId);
 }
+
+class ExitEvent extends ChessEvent {}
+

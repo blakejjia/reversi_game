@@ -56,5 +56,10 @@ class ChessBloc extends Bloc<ChessEvent, ChessState> {
     on<FindOpponentEvent>((event, emit) async {
       wsService.sendMessage("connectOpponent", event.opponentId);
     });
+
+    on<ExitEvent>((event, emit) {
+      wsService.sendMessage("exit", null);
+      emit(state.copyWith(color: 0));
+    });
   }
 }

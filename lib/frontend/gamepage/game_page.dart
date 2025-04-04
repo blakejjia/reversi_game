@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reversi_game/frontend/gamepage/bloc/chess_bloc.dart';
 
-part 'components/chess_cell.dart';
+import 'components/board/normal.dart';
+import 'components/board/welcome.dart';
+
 part 'components/chess_board.dart';
 
 class GamePage extends StatelessWidget {
@@ -22,7 +24,12 @@ class GamePage extends StatelessWidget {
             ),
           );
         }
-        return ChessBoard(state);
+        return Column(
+          children: [
+            Expanded(child: ChessBoard(state)),
+            Text(state.message),
+          ],
+        );
       },
     );
   }
